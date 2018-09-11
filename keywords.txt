@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map ACS712
+# by Kenneth AMOUSSOU
+# 	github: @azinke
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+ACS712		KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+readDC	KEYWORD2
+begin	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+#CM	LITERAL1	Constants
+#INC	LITERAL1	Constants
