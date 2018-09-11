@@ -15,6 +15,7 @@ ACS712		KEYWORD1
 #######################################
 readDC	KEYWORD2
 begin	KEYWORD2
+raw	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
