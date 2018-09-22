@@ -45,17 +45,17 @@ void ACS712::begin(){
     function: raw
     @summary: read multiple raw data from the sensor and compute the mean
     @parameter: none
-    @return: none
+    @return:
+        int16_t: return the mean of analogRead value
 */
-uint16_t ACS712::raw(){
+int16_t ACS712::raw(){
     float buffer = 0.0;
     uint8_t i = 0;
     for(i = 0; i < 10; i++){
         buffer += analogRead(_input);
         delayMicroseconds(10);
     };
-    buffer /= 10;   // read the mean over 10 reading
-    buffer -= _offset;  // remove offset form measurement
+    buffer /= i;   // read the mean over 10 reading
     return buffer;
 }
 
@@ -69,7 +69,8 @@ uint16_t ACS712::raw(){
 */
 float ACS712::readDC(){
     float buffer = (float)raw();
-    buffer = map(buffer, 0, 1023, 0, 5) * 1000; // voltage in mV
+    buffer = (buffer * 5/1023) * 1000; // voltage in mV
+    buffer = buffer - ((_offset * 5/1023) * 1000); // remove offset
     buffer /= SENSITIVITY;  // current in A
     return (buffer * 1000); // current in mA
 }

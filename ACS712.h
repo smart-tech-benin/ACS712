@@ -26,7 +26,7 @@
 class ACS712{
     public:
         ACS712(uint8_t input);
-        uint16_t raw(); // read raw data form the sensor
+        int16_t raw(); // read raw data form the sensor
         float readDC();
         void begin();   // Required to make first calibration of the sensor
                         // Calibration is only done once - in `begin` only -
