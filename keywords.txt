@@ -14,6 +14,7 @@ ACS712		KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 readDC	KEYWORD2
+readRMS	KEYWORD2
 begin	KEYWORD2
 raw	    KEYWORD2
 getOffset   KEYWORD2

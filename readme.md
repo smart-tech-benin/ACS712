@@ -69,6 +69,8 @@ the sensor measurement. So, we get three predefined constant for that
 
 ```c++
     float readDC(uint8_t unit)   // read DC current (process raw data)
+    
+    float readRMS(uint8_t unit)   // read RMS value of alternatif current
 ```
 
 `uint` specifie the unit of the returned value of the `readDC` methods. It could 

@@ -81,6 +81,35 @@ float ACS712::readDC(uint8_t unit = mA){
 }
 
 /**
+    function: readRMS
+    @summary: compute the raw data get form sensor to obtain the corresponding 
+              RMS current from an Alternatif Current (AC)
+    @parameter:
+        unit: the unit of the current we want to be returned
+              [0]: A
+              [1]: mA
+    @return:
+        float: value of the measured current in mA by default
+*/
+float ACS712::readRMS(uint8_t unit = mA){
+    float minValue = _offset;
+    float maxValue = _offset;
+    float buffer = 0;
+    unsigned long time = millis();
+    while(millis()-time < 1000){
+        buffer = raw();
+        if(buffer > maxValue) { maxValue = buffer; }
+        if(buffer < minValue) { minValue = buffer; }
+    }
+    buffer = (maxValue - minValue)/2; // compute peak voltage
+    buffer = (buffer * 5/1023) * 1000; // voltage in mV
+    buffer /= _sensitivity;  // current in A
+    buffer *= 0.70711;  // compute Root Mean Square current (RMS)
+    if(unit == A) return buffer;
+    else return (buffer * 1000); // current in mA
+}
+
+/**
     function: getOffset
     @summary: read the offset of the sensor
     @parameter: none

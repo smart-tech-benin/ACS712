@@ -26,6 +26,7 @@ class ACS712{
         ACS712(uint8_t input, uint8_t sensitivty);
         int16_t raw(); // read raw data form the sensor
         float readDC(uint8_t unit);
+        float readRMS(uint8_t unit); // measure the RMS value of an Alternatif current
         float calibrate();  // Make first calibration of the sensor
         float getOffset();  // read the sensor offset after calibration done
         void begin();       // auto-calibration
