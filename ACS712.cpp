@@ -7,20 +7,21 @@
 */
 #include "ACS712.h"
 
-ACS712::ACS712(uint8_t input = A0){
+ACS712::ACS712(uint8_t input = A0, uint8_t sensitivity = ACS712_5){
     _input = input;
-    _offset = 0.0;
+    _offset = 512.0; // default offset value
+    _sensitivity = sensitivity;
 }
 
 /**
-    function: _calibrate
+    function: calibrate
     @summary: make multiple reading of the analog input in order to compute the
               mean.
     @parameter: none
     @return:
         float: offset voltage of the sensor
 */
-float ACS712::_calibrate(){
+float ACS712::calibrate(){
     uint8_t i = 0;
     for(i = 0; i < 150; i++){
         _offset += analogRead(_input);
@@ -38,7 +39,7 @@ float ACS712::_calibrate(){
 */
 void ACS712::begin(){
     // TODO: maybe used for futher preprocessing when measuring AC current
-    _calibrate();
+    calibrate();
 }
 
 /**
@@ -63,16 +64,20 @@ int16_t ACS712::raw(){
     function: readDC
     @summary: compute the raw data get form sensor to obtain the corresponding 
               current
-    @parameter: none
+    @parameter:
+        unit: the unit of the current we want to be returned
+              [0]: A
+              [1]: mA
     @return:
-        float: value of the measured current in mA
+        float: value of the measured current in mA by default
 */
-float ACS712::readDC(){
+float ACS712::readDC(uint8_t unit = mA){
     float buffer = (float)raw();
     buffer = (buffer * 5/1023) * 1000; // voltage in mV
     buffer = buffer - ((_offset * 5/1023) * 1000); // remove offset
-    buffer /= SENSITIVITY;  // current in A
-    return (buffer * 1000); // current in mA
+    buffer /= _sensitivity;  // current in A
+    if(unit == A) return buffer;
+    else return (buffer * 1000); // current in mA
 }
 
 /**
