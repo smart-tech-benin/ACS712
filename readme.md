@@ -41,21 +41,50 @@ example in the example folder.
 - Setup
 
 ```c++
-    ACS712 mySensor = ACS712(A0);
+    ACS712 mySensor = ACS712(A0, ACS712_30);
     
     void setup(){
         mySensor.begin(); // calibrate the sensor
     }
 ```
 
-- Read data
+### Methods
 
 ```c++
-    mySensor.raw()      // read raw data from the sensor
-    
-    mySensor.readDC()   // read DC current (process raw data)
+    ACS712(uint8_t input, uint8_t sensitivty)
 ```
-To get the offset value of the sensor use: `mySensor.getOffset()`
+
+The constructor take two parameter:
+
+- input: the analog input  used for the sensor
+- sensitivity: the sensitivit of the sensor. This value depends on the range of 
+the sensor measurement. So, we get three predefined constant for that
+    - ACS712_5    185 mV/A
+    - ACS712_20   100 mV/A
+    - ACS712_30   66 mV/A
+
+```c++
+    int16_t raw()      // read raw data from the sensor
+```
+
+```c++
+    float readDC(uint8_t unit)   // read DC current (process raw data)
+```
+
+`uint` specifie the unit of the returned value of the `readDC` methods. It could 
+be two of the predefined constant:
+
+- `A` for Ampere
+- `mA` for milli Ampere
+
+```c++
+    float calibrate();  // Make first calibration of the sensor
+```
+
+```c++
+    float getOffset();  // read the sensor offset after calibration done
+```
+ If none calibration is done the `offset` of the sensor is`512`
 
 
 
