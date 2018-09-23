@@ -15,11 +15,17 @@ ACS712		KEYWORD1
 #######################################
 readDC	KEYWORD2
 begin	KEYWORD2
-raw	KEYWORD2
+raw	    KEYWORD2
+getOffset   KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+# Sensivitity values
+ACS712_5	LITERAL1	Constants
+ACS712_20	LITERAL1	Constants
+ACS712_30	LITERAL1	Constants
 
-#CM	LITERAL1	Constants
-#INC	LITERAL1	Constants
+# Current units
+A	LITERAL1	Constants
+mA	LITERAL1	Constants
