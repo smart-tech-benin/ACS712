@@ -59,9 +59,9 @@ The constructor take two parameter:
 - input: the analog input  used for the sensor
 - sensitivity: the sensitivit of the sensor. This value depends on the range of 
 the sensor measurement. So, we get three predefined constant for that
-    - ACS712_5    185 mV/A
-    - ACS712_20   100 mV/A
-    - ACS712_30   66 mV/A
+    - ACS712_5 - 185 mV/A
+    - ACS712_20 - 100 mV/A
+    - ACS712_30 - 66 mV/A
 
 ```c++
     int16_t raw()      // read raw data from the sensor
