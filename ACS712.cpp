@@ -23,6 +23,7 @@ ACS712::ACS712(uint8_t input = A0, uint8_t sensitivity = ACS712_5){
 */
 float ACS712::calibrate(){
     uint8_t i = 0;
+    _offset = 0;
     for(i = 0; i < 150; i++){
         _offset += analogRead(_input);
         delayMicroseconds(10);
